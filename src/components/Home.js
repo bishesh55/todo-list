@@ -18,9 +18,6 @@ function Home() {
       });
     });
   };
-  function getSomeData(){
-    
-  }
 
 
   return (
@@ -40,7 +37,7 @@ function Home() {
           <button class="button-add"onClick={listItems}>+</button>
         </div>
         <div className="added-items center wid-100">
-        <button onClick={}></button>
+        {/* <button onClick={}></button> */}
         <ol className="listing">
           {Item.map((itemval, index) => {
             return (
