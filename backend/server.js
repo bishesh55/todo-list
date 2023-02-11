@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
+require("dotenv").config();
 const { Sequelize } = require("sequelize");
 
 app.use(cors());
@@ -32,11 +33,16 @@ app.listen(8000, () => {
 });
 
 // Option 3: Passing parameters separately (other dialects)
-const sequelize = new Sequelize("todo", "root", "mysql12345", {
-  host: "localhost",
-  dialect:
-    "mysql" /* one of 'mysql' | 'postgres' | 'sqlite' | 'mariadb' | 'mssql' | 'db2' | 'snowflake' | 'oracle' */,
-});
+const sequelize = new Sequelize(
+  process.env.DB_DATABASE,
+  process.env.DB_USER,
+  process.env.DB_PASSWORD,
+  {
+    host: "localhost",
+    dialect:
+      "mysql" /* one of 'mysql' | 'postgres' | 'sqlite' | 'mariadb' | 'mssql' | 'db2' | 'snowflake' | 'oracle' */,
+  }
+);
 async function testConnection() {
   try {
     await sequelize.authenticate();
@@ -45,4 +51,4 @@ async function testConnection() {
     console.error("Unable to connect to the database:", error);
   }
 }
-testConnection()
+testConnection();
