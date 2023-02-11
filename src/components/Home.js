@@ -1,9 +1,13 @@
 import React, { useState } from "react";
 import ToDoList from "./ToDoList";
 import "./main.css";
+import axios from 'axios';
+
 function Home() {
   const [nameItem, setnameItem] = useState("");
   const [Item, setItem] = useState([]);
+  const [product,setProduct] = useState('');
+  const [hero,setHero]=useState('');
   const nameIt = (event) => {
     setnameItem(event.target.value);
   };
@@ -18,6 +22,25 @@ function Home() {
       });
     });
   };
+ async function getData(){
+    fetch('http://127.0.0.1:8000/product')
+    .then(res => res.json())
+    .then(a => {
+      setProduct(a.id)
+     
+      
+      // console.log(product)
+    })           
+  }
+   function getHero(){
+    fetch('http://127.0.0.1:8000/hero')
+    .then(res => res.json())
+    .then(b => {
+      setHero(b.id)
+      
+      // console.log(monkeyking)
+    })           
+  }
 
 
   return (
@@ -35,9 +58,12 @@ function Home() {
             onChange={nameIt}
           />
           <button class="button-add"onClick={listItems}>+</button>
+          Rendering displayed data: {product}
+          Monkeyking stats:{hero}
         </div>
         <div className="added-items center wid-100">
-        {/* <button onClick={}></button> */}
+        <button onClick={getData}>Get data</button>
+        <button onClick={getHero}>Get hero</button>
         <ol className="listing">
           {Item.map((itemval, index) => {
             return (
