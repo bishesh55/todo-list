@@ -41,6 +41,11 @@ function Home() {
       // console.log(monkeyking)
     })           
   }
+  function sendHero(){
+    axios.post("http://127.0.0.1:8000/hero",{
+      name:nameItem,
+    })
+  }
 
 
   return (
@@ -64,6 +69,8 @@ function Home() {
         <div className="added-items center wid-100">
         <button onClick={getData}>Get data</button>
         <button onClick={getHero}>Get hero</button>
+        <button onClick={sendHero}>Send hero</button>
+
         <ol className="listing">
           {Item.map((itemval, index) => {
             return (

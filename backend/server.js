@@ -3,6 +3,7 @@ const app = express();
 const cors = require("cors");
 const { Sequelize } = require("sequelize");
 
+app.use(express.json()); //add this before any route or before using req.body
 app.use(cors());
 
 app.get("/", (req, res) => {
@@ -26,6 +27,11 @@ app.get("/hero", (req, res) => {
   };
   res.send(monkeyking);
 });
+app.post("/hero", (req, res) => {
+  console.log("Hero");
+  console.log(req.body);
+  res.send("body");
+});
 
 app.listen(8000, () => {
   console.log("Server listening on port 8000");
@@ -45,4 +51,4 @@ async function testConnection() {
     console.error("Unable to connect to the database:", error);
   }
 }
-testConnection()
+testConnection();
