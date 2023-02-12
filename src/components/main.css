@@ -60,9 +60,10 @@
   /* background-color: rgba(152, 63, 63, 0.642); */
   background-color: red;
 }
-.image-contaiter {
-  position: fixed;
+.image-container {
+  position: absolute;
+  top: 200px;
+  left: 515px;
   height: 512px;
   width: 512px;
-  
 }

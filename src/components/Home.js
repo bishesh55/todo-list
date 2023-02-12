@@ -90,7 +90,7 @@ function Home() {
           <button class="button-add" onClick={listItems}>
             +
           </button>
-          Rendering displayed data: {product}
+          {/* Rendering displayed data: {product} */}
           Monkeyking stats:{hero}
         </div>
         <div className="added-items center wid-100">
