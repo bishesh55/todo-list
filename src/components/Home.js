@@ -52,11 +52,18 @@ function Home() {
   useEffect(() => {
     console.log("running useEffect");
     console.log(prompt, "Prompt");
+    if (prompt === null || prompt === "") {
+      console.log("empty prompt");
+      return;
+    }
+
     const reqUrl = "http://127.0.0.1:8000/generate-image?prompt=" + prompt;
     console.log(reqUrl);
-    axios.get("http://127.0.0.1:8000/generate-image").then((res) => {
-      console.log(res);
+    axios.get(reqUrl).then((res) => {
+      console.log(res.data);
+      setImage(res.data);
     });
+
     // open ai api
     // axios
     //   .get("http://127.0.0.1:8000/generate-image?prompt=".prompt)
@@ -107,7 +114,7 @@ function Home() {
         </div>
       </div>
       <div>
-        <img src={image} alt={prompt}></img>
+        <img className="image-container" src={image} alt={prompt}></img>
       </div>
     </div>
   );
