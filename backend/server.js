@@ -58,3 +58,38 @@ async function testConnection() {
   }
 }
 testConnection();
+
+// Openai stuff
+const { Configuration, OpenAIApi } = require("openai");
+
+const configuration = new Configuration({
+  apiKey: process.env.OPENAI_API_KEY,
+});
+const openai = new OpenAIApi(configuration);
+
+async function openAiTest() {
+  const completion = await openai.createCompletion({
+    model: "text-davinci-002",
+    prompt: "Hello world",
+  });
+  console.log(completion.data.choices[0].text);
+}
+
+app.get("/generate-image", function (req, res) {
+  const receivedPrompt = req.query.prompt;
+  console.log(receivedPrompt)
+  if (receivedPrompt == null || receivedPrompt === "undefined") {
+    res.send("Invalid prompt");
+  }
+
+  openai
+    .createImage({
+      prompt: req.query.prompt ?? "Nothing",
+      n: 1,
+      size: "1024x1024",
+    })
+    .then((response) => {
+      const image_url = response.data.data[0].url;
+      res.send(image_url);
+    });
+});
